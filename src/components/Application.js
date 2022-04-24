@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import 'components/Application.scss';
 import DayList from 'components/DayList';
-import Appointment from "components/Appointment";
+import Appointment from 'components/Appointment';
+import axios from 'axios';
 
 const appointments = {
   1: {
@@ -44,8 +44,24 @@ const appointments = {
 };
 
 export default function Application(props) {
-  const [days, setDays] = useState([]);
   const [day, setDay] = useState('Monday');
+  const [days, setDays] = useState([]);
+  const [appointments, setAppointments] = useState({});
+  const [interviewers, setInterviewers] = useState({});
+
+  useEffect(() => {
+    Promise.all([
+      axios.get('/api/days'),
+      axios.get('/api/appointments'),
+      axios.get('/api/interviewers'),
+    ]).then((all) => {
+      console.log('all: ', all);
+
+      setDays(all[0]);
+      setAppointments(all[1]);
+      setInterviewers(all[2]);
+    });
+  }, []);
 
   return (
     <main className="layout">
@@ -57,7 +73,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={days} day={'Monday'} onChange={setDay} />
+          <DayList days={days} value={day} onChange={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -65,9 +81,7 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
-      </section>
+      <section className="schedule">{schedule}</section>
     </main>
   );
 }
