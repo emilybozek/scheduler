@@ -1,8 +1,13 @@
 export const getAppointmentsForDay = (day, days, appointments) => {
+  let appointmentIds = []
   let results = [];
-  const checkDay = days.filter((d) => d.name === day);
+  for (const item of days) {
+    if (item.name === day) {
+      appointmentIds = item.appointments;
+    }
+  }
   const keys = Object.keys(appointments);
-  for (let x of checkDay[0].appointments) {
+  for (let x of appointmentIds) {
     for (let y of keys) {
       if (x === Number(y)) {
         results.push(appointments[y]);
@@ -12,31 +17,16 @@ export const getAppointmentsForDay = (day, days, appointments) => {
   return results;
 };
 
-export const getInterview = (interviewers, appointments) => {
-  let results = [];
-  let interviewArr = [];
-  let interviewerArr = [];
-  const interviewersValues = Object.values(interviewers);
-  const appointmentsValues = Object.values(appointments);
-  for (let item of appointmentsValues) {
-    interviewArr.push(item.interview);
+export const getInterview = (interviewers, interview) => {
+  if (!interview) {
+    return null;
   }
 
-  const newArray = interviewArr.filter((element) => {
-    return element !== null;
-  });
-
-  for (let item of newArray) {
-    interviewerArr.push(item.interviewer);
+  const interviewerInfo = interviewers[interview.interviewer];
+  
+  return {
+    student: interview.student,
+    interviewer: interviewerInfo
   }
-  for (let item of interviewerArr) {
-    for (let y of interviewersValues) {
-      if (item === y.id) {
-        results.push(interviewers[y.id]);
-      }
-    }
-  }
-  return results;
 };
 
-export const getInterviewersForDay = () => {};
