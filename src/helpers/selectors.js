@@ -22,11 +22,11 @@ export const getInterview = (interviewers, appointments) => {
   for (let item of appointmentsValues) {
     interviewArr.push(item.interview)
   }
-  // filter null values
+
   const newArray = interviewArr.filter(element => {
     return element !== null;
   });
-  
+
   for (let item of newArray) {
     interviewerArr.push(item.interviewer)
   }
