@@ -31,7 +31,7 @@ export const getInterview = (interviewers, appointments) => {
     interviewerArr.push(item.interviewer)
   }
   for (let item of interviewerArr) {
-    for (let y of values) {
+    for (let y of interviewersValues) {
       if (item === y.id) {
         results.push(interviewers[y.id])
       }
