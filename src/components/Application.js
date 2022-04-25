@@ -3,19 +3,24 @@ import './Application.scss';
 import DayList from '../components/DayList';
 import Appointment from '../components/Appointment';
 import axios from 'axios';
-import { getAppointmentsForDay } from '../helpers/selectors';
+import { getAppointmentsForDay, getInterview } from '../helpers/selectors';
 
 export default function Application(props) {
   const [day, setDay] = useState('Monday');
+  console.log("SET DAY", setDay, "DAY", day)
   const [days, setDays] = useState([]);
-  // eslint-disable-next-line
+  console.log("SET DAYS", setDays, "DAYS", days)
   const [appointments, setAppointments] = useState({});
-  // eslint-disable-next-line
+  console.log("SET APPOINTMENTS", setAppointments, "APPOINTMENTS", appointments)
   const [interviewers, setInterviewers] = useState({});
-  const dailyAppointments = getAppointmentsForDay(day);
+  console.log("SET INTERVIEWERS", setInterviewers, "INTERVIEWERS", interviewers)
+ 
+  const dailyAppointments = getAppointmentsForDay(day, days, appointments);
+  console.log("DAILY APPOINTMENTS", dailyAppointments)
 
   const schedule = dailyAppointments.map((appointment) => {
-    const interview = getInterview(appointment.interview);
+    const interview = getInterview(interviewers, appointment.interview);
+
 
     return (
       <Appointment
@@ -27,11 +32,12 @@ export default function Application(props) {
     );
   });
 
+
   useEffect(() => {
     Promise.all([
-      axios.get('/api/days'),
-      axios.get('/api/appointments'),
-      axios.get('/api/interviewers'),
+      axios.get('http://localhost:8001/api/days'),
+      axios.get('http://localhost:8001/api/appointments'),
+      axios.get('http://localhost:8001/api/interviewers'),
     ]).then((all) => {
       setDays(all[0].data);
       setAppointments(all[1].data);
