@@ -1,16 +1,16 @@
 export const getAppointmentsForDay = (day, days, appointments) => {
   let appointmentIds = []
   let results = [];
-  for (const item of days) {
-    if (item.name === day) {
-      appointmentIds = item.appointments;
+  for (const x of days) {
+    if (x.name === day) {
+      appointmentIds = x.appointments;
     }
   }
   const keys = Object.keys(appointments);
-  for (let x of appointmentIds) {
-    for (let y of keys) {
-      if (x === Number(y)) {
-        results.push(appointments[y]);
+  for (let y of appointmentIds) {
+    for (let z of keys) {
+      if (y === Number(z)) {
+        results.push(appointments[z]);
       }
     }
   }
@@ -30,4 +30,21 @@ export const getInterview = (interviewers, interview) => {
   }
 };
 
-
+export const getInterviewersForDay = (day, days, interviewers) => {
+  let interviewerIds = []
+  let results = [];
+  for (const x of days) {
+    if (x.name === day) {
+      interviewerIds = x.interviewers;
+    }
+  }
+  const keys = Object.keys(interviewers);
+  for (let x of interviewerIds) {
+    for (let y of keys) {
+      if (x === Number(y)) {
+        results.push(interviewers[y]);
+      }
+    }
+  }
+  return results;
+}
