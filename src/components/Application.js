@@ -6,32 +6,45 @@ import axios from 'axios';
 import { getAppointmentsForDay, getInterview } from '../helpers/selectors';
 
 export default function Application(props) {
-  const [day, setDay] = useState('Monday');
-  console.log("SET DAY", setDay, "DAY", day)
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...appointments,
+      [id]: appointment,
+    };
+  }
+
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer,
+    };
+  }
+
+  const [day, setDay] = useState('Tuesday');
+  console.log('SET DAY', setDay, 'DAY', day);
   const [days, setDays] = useState([]);
-  console.log("SET DAYS", setDays, "DAYS", days)
+  console.log('SET DAYS', setDays, 'DAYS', days);
   const [appointments, setAppointments] = useState({});
-  console.log("SET APPOINTMENTS", setAppointments, "APPOINTMENTS", appointments)
+  console.log(
+    'SET APPOINTMENTS',
+    setAppointments,
+    'APPOINTMENTS',
+    appointments
+  );
   const [interviewers, setInterviewers] = useState({});
-  console.log("SET INTERVIEWERS", setInterviewers, "INTERVIEWERS", interviewers)
- 
+  console.log(
+    'SET INTERVIEWERS',
+    setInterviewers,
+    'INTERVIEWERS',
+    interviewers
+  );
+
   const dailyAppointments = getAppointmentsForDay(day, days, appointments);
-  console.log("DAILY APPOINTMENTS", dailyAppointments)
-
-  const schedule = dailyAppointments.map((appointment) => {
-    const interview = getInterview(interviewers, appointment.interview);
-
-
-    return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-      />
-    );
-  });
-
+  console.log('DAILY APPOINTMENTS', dailyAppointments);
 
   useEffect(() => {
     Promise.all([
@@ -63,7 +76,27 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">{schedule}</section>
+      <section className="schedule">
+        {dailyAppointments.map((appointment) => {
+          console.log("APPOINTMENT.INTERVIEW", appointment.interview);
+          const interview = getInterview(interviewers, appointment.interview);
+
+          // if (!interview) {
+          //   return null;
+          // }
+
+          console.log('GET INTERVIEW', interview);
+
+          return (
+            <Appointment
+              key={appointment.id}
+              id={appointment.id}
+              time={appointment.time}
+              interview={interview}
+            />
+          );
+        })}
+      </section>
     </main>
   );
 }
