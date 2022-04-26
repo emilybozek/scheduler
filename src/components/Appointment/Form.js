@@ -13,8 +13,10 @@ export default function Form(props) {
   };
 
   const cancel = () => {
-    reset();
-    props.onCancel();
+    if (props.onCancel) {
+      props.onCancel();
+      reset();
+    }
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // take in an initial mode
 // set the mode state with the initial mode provided
@@ -25,22 +25,16 @@ export default function useVisualMode(initial) {
       setHistory((prev) => newHistory);
     }
   };
-
+  // Function that sets the history state to go back
+  // to the last history (ie. remove the last added item in array)
   const back = () => {
-    // Get history
-    // Get the previous mode from history
-    // Update history with the new state (removing the last mode)
-    // Set the mode to the previous mode
-    // Push or Pop the state
-    const back = () => {
-      let newHistory = [...history];
-      newHistory.pop(mode);
-      setHistory((prev) => newHistory);
-      if (history.length > 1) {
-        setMode((prev) => newHistory[newHistory.length - 1]);
-      }
-    };
-  };
+    if (history.length > 1) {
+      setHistory((prev) => {
+        const newArr = prev.slice(0, -1);
+        return newArr;
+      });
+    }
+  }
   return { mode, transition, back };
 }
 
