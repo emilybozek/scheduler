@@ -20,13 +20,14 @@ export const getAppointmentsForDay = (day, days, appointments) => {
 export const getInterview = (interviewers, interview) => {
   if (!interview) {
     return null;
-  }
-
+  } 
   const interviewerInfo = interviewers[interview.interviewer];
-  
+  console.log("INTERVIEWER INFO", interviewerInfo)
+  console.log("INTERVIEW STUDENT", interview.student)
   return {
     student: interview.student,
     interviewer: interviewerInfo
   }
 };
+
 
