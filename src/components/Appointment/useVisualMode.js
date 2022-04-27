@@ -3,15 +3,15 @@ import { useState } from 'react';
 export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
 
-  const transition = (newHistory, replace = false) => {
+  const transition = (value, replace = false) => {
     if (replace) {
       setHistory((prev) => {
         const newArr = prev.slice(0, -1);
-        return [...newArr, newHistory];
+        return [...newArr, value];
       });
     } else {
       setHistory((prev) => {
-        return [...prev, newHistory];
+        return [...prev, value];
       });
     }
   };
