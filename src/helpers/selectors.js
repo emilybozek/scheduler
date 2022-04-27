@@ -1,50 +1,47 @@
-export const getAppointmentsForDay = (day, days, appointments) => {
-  let appointmentIds = []
+export const getAppointmentsForDay = (state, day) => {
+  let appointmentIds = [];
   let results = [];
-  for (const x of days) {
+  for (const x of state.days) {
     if (x.name === day) {
       appointmentIds = x.appointments;
     }
   }
-  const keys = Object.keys(appointments);
+  const keys = Object.keys(state.appointments);
   for (let y of appointmentIds) {
     for (let z of keys) {
       if (y === Number(z)) {
-        results.push(appointments[z]);
+        results.push(state.appointments[z]);
       }
     }
   }
   return results;
 };
 
-export const getInterview = (interviewers, interview) => {
+export const getInterview = (state, interview) => {
   if (!interview) {
     return null;
-  } 
-  const interviewerInfo = interviewers[interview.interviewer];
-  console.log("INTERVIEWER INFO", interviewerInfo)
-  console.log("INTERVIEW STUDENT", interview.student)
-  return {
-    student: interview.student,
-    interviewer: interviewerInfo
+  } else {
+    const interviewerId = interview.interviewer;
+    const interviewerObj = { ...state.interviewers[interviewerId] };
+    return { ...interview, interviewer: interviewerObj };
   }
 };
 
-export const getInterviewersForDay = (day, days, interviewers) => {
-  let interviewerIds = []
+export const getInterviewersForDay = (state, day) => {
+  let interviewerIds = [];
   let results = [];
-  for (const x of days) {
+  for (const x of state.days) {
     if (x.name === day) {
       interviewerIds = x.interviewers;
     }
   }
-  const keys = Object.keys(interviewers);
+  const keys = Object.keys(state.interviewers);
   for (let x of interviewerIds) {
     for (let y of keys) {
       if (x === Number(y)) {
-        results.push(interviewers[y]);
+        results.push(state.interviewers[y]);
       }
     }
   }
   return results;
-}
+};

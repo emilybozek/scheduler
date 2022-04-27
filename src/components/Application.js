@@ -11,18 +11,7 @@ import {
 import useApplicationData from './useApplicationData';
 
 export default function Application(props) {
-  const {
-    day,
-    days,
-    appointments,
-    interviewers,
-    setDay,
-    setDays,
-    setAppointments,
-    setInterviewers,
-    bookInterview,
-    cancelInterview
-  } = useApplicationData();
+  const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
 
   function save(name, interviewer) {
     const interview = {
@@ -31,8 +20,8 @@ export default function Application(props) {
     };
   }
 
-  const dailyAppointments = getAppointmentsForDay(day, days, appointments);
-  const dailyInterviewers = getInterviewersForDay(day, days, interviewers);
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
 
   console.log('DAILY INTERVIEWERS', dailyInterviewers);
   console.log('DAILY APPOINTMENTS', dailyAppointments);
@@ -47,7 +36,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList value={day} days={days} onChange={setDay} />
+          <DayList value={state.day} days={state.days} onChange={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -58,7 +47,7 @@ export default function Application(props) {
       <section className="schedule">
         {dailyAppointments.map((appointment) => {
           console.log('APPOINTMENT.INTERVIEW', appointment.interview);
-          const interview = getInterview(interviewers, appointment.interview);
+          const interview = getInterview(state, appointment.interview);
 
           console.log('GET INTERVIEW', interview);
           return (

@@ -2,24 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function useApplicationData() {
-  const [day, setDay] = useState('Monday');
-  console.log('SET DAY', setDay, 'DAY', day);
-  const [days, setDays] = useState([]);
-  console.log('SET DAYS', setDays, 'DAYS', days);
-  const [appointments, setAppointments] = useState({});
-  console.log(
-    'SET APPOINTMENTS',
-    setAppointments,
-    'APPOINTMENTS',
-    appointments
-  );
-  const [interviewers, setInterviewers] = useState({});
-  console.log(
-    'SET INTERVIEWERS',
-    setInterviewers,
-    'INTERVIEWERS',
-    interviewers
-  );
+  const [state, setState] = useState({
+    day: 'Monday',
+    days: [],
+    appointments: {},
+    interviewers: {},
+  });
+  const setDay = (day) => setState({ ...state, day });
 
   useEffect(() => {
     Promise.all([
@@ -27,9 +16,12 @@ export default function useApplicationData() {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers'),
     ]).then((all) => {
-      setDays(all[0].data);
-      setAppointments(all[1].data);
-      setInterviewers(all[2].data);
+      setState((prev) => ({
+        ...prev,
+        days: all[0].data,
+        appointments: all[1].data,
+        interviewers: all[2].data,
+      }));
     });
   }, []);
 
@@ -52,19 +44,19 @@ export default function useApplicationData() {
 
   function bookInterview(id, interview) {
     const appointment = {
-      ...appointments[id],
+      ...state.appointments[id],
       interview: { ...interview },
     };
 
     const appointments = {
-      ...appointments,
+      ...state.appointments,
       [id]: appointment,
     };
 
     const urlBook = `http://localhost:8001/api/appointments/${id}`;
 
     return axios.put(urlBook, { interview }).then((response) => {
-      setDay((prev) => {
+      setState((prev) => {
         const days = updateSpots(prev.day, prev.days, appointments);
         return {
           ...prev,
@@ -78,19 +70,19 @@ export default function useApplicationData() {
   // axios request to delete interview
   const cancelInterview = (id) => {
     const appointment = {
-      ...appointments[id],
+      ...state.appointments[id],
       interview: null,
     };
 
     const appointments = {
-      ...appointments,
+      ...state.appointments,
       [id]: appointment,
     };
 
     const urlDelete = `/api/appointments/${id}`;
 
     return axios.delete(urlDelete).then((response) => {
-      setDays((prev) => {
+      setState((prev) => {
         const days = updateSpots(prev.day, prev.days, appointments);
         return { ...prev, appointments, days };
       });
@@ -98,14 +90,8 @@ export default function useApplicationData() {
   };
 
   return {
-    day,
-    days,
-    appointments,
-    interviewers,
+    state,
     setDay,
-    setDays,
-    setAppointments,
-    setInterviewers,
     bookInterview,
     cancelInterview,
   };

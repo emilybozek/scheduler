@@ -29,7 +29,7 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    transition(SHOW);
+    transition(SAVING);
 
     props
       .bookInterview(props.id, interview)
