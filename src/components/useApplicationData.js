@@ -79,7 +79,7 @@ export default function useApplicationData() {
       [id]: appointment,
     };
 
-    const urlDelete = `/api/appointments/${id}`;
+    const urlDelete = `http://localhost:8001/api/appointments/${id}`;
 
     return axios.delete(urlDelete).then((response) => {
       setState((prev) => {
