@@ -6,7 +6,9 @@ export default function Form(props) {
   console.log('FORM PROPS', props);
   const [name, setName] = useState(props.name || '');
   const [student, setStudent] = useState(props.student || '');
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [interviewer, setInterviewer] = useState(
+    props.interviewer ? props.interviewer.id : null
+  );
   const [error, setError] = useState('');
 
   const reset = () => {
@@ -50,7 +52,7 @@ export default function Form(props) {
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
-          onChange={setInterviewer}
+          setInterviewer={setInterviewer}
         />
       </section>
       <section className="appointment__card-right">

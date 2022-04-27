@@ -11,7 +11,8 @@ import {
 import useApplicationData from './useApplicationData';
 
 export default function Application(props) {
-  const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
+  const { state, setDay, bookInterview, cancelInterview } =
+    useApplicationData();
 
   function save(name, interviewer) {
     const interview = {
@@ -58,6 +59,7 @@ export default function Application(props) {
               interview={interview}
               interviewers={dailyInterviewers}
               bookInterview={bookInterview}
+              cancelInterview={cancelInterview}
             />
           );
         })}

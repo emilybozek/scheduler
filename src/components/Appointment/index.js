@@ -82,6 +82,9 @@ export default function Appointment(props) {
           onCancel={back}
         />
       )}
+      {mode === EDIT && (
+        <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
+      )}
       {mode === ERROR_SAVE && <Error message={'cannot save'} onClose={back} />}
       {mode === ERROR_DELETE && (
         <Error message={'cannot delete'} onClose={back} />
