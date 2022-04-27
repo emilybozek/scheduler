@@ -4,7 +4,7 @@ import '../components/InterviewerList.scss';
 
 export default function InterviewerList(props) {
   const interviewerArray = props.interviewers.map((interviewer) => {
-    console.log('INTERVIEWERLIST PROPS', props.setInterviewer);
+    console.log('INTERVIEWERLIST PROPS', props.value);
     return (
       <InterviewerListItem
         id={interviewer.id}
