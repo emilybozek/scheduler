@@ -10,16 +10,28 @@ import {
 } from '../helpers/selectors';
 
 export default function Application(props) {
-  function bookInterview(id, interview) {
-    const appointment = {
-      ...appointments[id],
-      interview: { ...interview },
-    };
-    const appointments = {
-      ...appointments,
-      [id]: appointment,
-    };
-  }
+
+  // gets the spots for a given day:
+  const getSpotsForDay = (dayObj, appointments) => {
+    let spots = 0;
+    dayObj.appointments.forEach((id) => !appointments[id].interview && spots++);
+    return spots;
+  };
+
+  // Function that updates the spots remaining for given day
+  const updateSpots = (dayName, days, appointments) => {
+    // find the day object:
+    const dayObj = days.find((day) => day.name === dayName);
+
+    // calculate the spots for given day:
+    const spots = getSpotsForDay(dayObj, appointments);
+
+    // update the new day object into state without mutating state:
+    const newDay = { ...dayObj, spots };
+    const newDays = days.map((day) => (day.name === dayName ? newDay : day));
+
+    return newDays;
+  };
 
   function save(name, interviewer) {
     const interview = {
@@ -64,6 +76,32 @@ export default function Application(props) {
     });
   }, []);
 
+    // function thate makes Axios put request to book interview
+    function bookInterview(id, interview) {
+      const appointment = {
+        ...appointments[id],
+        interview: { ...interview },
+      };
+  
+      const appointments = {
+        ...appointments,
+        [id]: appointment,
+      };
+  
+      const urlBook = `http://localhost:8001/api/appointments/${id}`;
+  
+      return axios.put(urlBook, { interview }).then((response) => {
+        setDay((prev) => {
+          const days = updateSpots(prev.day, prev.days, appointments);
+          return {
+            ...prev,
+            appointments,
+            days,
+          };
+        });
+      });
+    }
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -95,6 +133,7 @@ export default function Application(props) {
               time={appointment.time}
               interview={interview}
               interviewers={dailyInterviewers}
+              bookInterview={bookInterview}
             />
           );
         })}

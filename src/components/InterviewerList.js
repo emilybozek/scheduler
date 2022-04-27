@@ -14,6 +14,7 @@ export default function InterviewerList(props) {
         setInterviewer={() => {
           props.setInterviewer(interviewer.id);
         }}
+        key={interviewer.id}
       />
     );
   });
