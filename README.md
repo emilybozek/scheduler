@@ -10,15 +10,15 @@ A single-page scheduling app that allows users to create, edit, and delete appoi
 
 ### Adding an Interview
 
-![Adding an interview]()
+![Adding an interview](https://github.com/feltfan/scheduler/blob/master/docs/addappointment.gif?raw=true)
 
 ### Editing an Interview
 
-![Editing an interview]()
+![Editing an interview](https://github.com/feltfan/scheduler/blob/master/docs/editappointment.gif?raw=true)
 
 ### Deleting an Interview
 
-![Deleting an interview]()
+![Deleting an interview](<https://github.com/feltfan/scheduler/blob/master/docs/deleteappointment(1).gif?raw=true>)
 
 ### Setup
 
@@ -36,18 +36,19 @@ npm start
 npm test
 ```
 
-### API Server and Database Setup 
+### API Server and Database Setup
 
 To Implement Database and Server:
+
 - Start by forking and cloning the scheduler-api server: https://github.com/lighthouse-labs/scheduler-api
 - Follow the steps outlined in README to setup the database
 - Run `npm start` to start the server
 
 ## Dependencies
+
 - Axios
 - Classnames
 - Normalize.css
 - React
 - React-dom
 - React-scripts
-
