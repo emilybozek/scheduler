@@ -20,10 +20,6 @@ A single-page scheduling app that allows users to create, edit, and delete appoi
 
 ![Deleting an interview](<https://github.com/feltfan/scheduler/blob/master/docs/deleteappointment(1).gif?raw=true>)
 
-### Setup
-
-Install dependencies with `npm install`.
-
 ### Running Webpack Development Server
 
 ```sh
