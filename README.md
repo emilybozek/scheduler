@@ -10,15 +10,15 @@ A single-page React app that allows users to create, edit, and delete interviews
 
 ### Adding an Interview
 
-![Adding an interview](https://github.com/feltfan/scheduler/blob/master/docs/addappointment.gif?raw=true)
+![Adding an interview]()
 
 ### Editing an Interview
 
-![Editing an interview](https://github.com/feltfan/scheduler/blob/master/docs/editappointment.gif?raw=true)
+![Editing an interview]()
 
 ### Deleting an Interview
 
-![Deleting an interview](<https://github.com/feltfan/scheduler/blob/master/docs/deleteappointment(1).gif?raw=true>)
+![Deleting an interview]()
 
 ### Running Webpack Development Server
 
