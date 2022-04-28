@@ -6,7 +6,7 @@ Install dependencies with `npm install`.
 
 ## Project Description
 
-A single-page React app that allows users to create, edit, and delete interviews. Built using Lighthouse Labs boilerplate: https://github.com/lighthouse-labs/scheduler)
+A single-page React app that allows users to create, edit, and delete interviews. Built from Lighthouse Labs: https://github.com/lighthouse-labs/scheduler)
 
 ### Adding an Interview
 
