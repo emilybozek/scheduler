@@ -6,7 +6,7 @@ Install dependencies with `npm install`.
 
 ## Project Description
 
-A single-page scheduling app that allows users to create, edit, and delete appointments. To create an appointment a user chooses a time, an available interviewer, and inputs their name to book. The number of remaining spots for that day updates when a user makes a change to the appointments.
+A single-page React app that allows users to create, edit, and delete interviews. Built using Lighthouse Labs boilerplate: https://github.com/lighthouse-labs/scheduler)
 
 ### Adding an Interview
 
