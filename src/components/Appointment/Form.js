@@ -3,7 +3,6 @@ import InterviewerList from '../InterviewerList';
 import Button from '../Button';
 
 export default function Form(props) {
-  console.log('FORM PROPS', props);
   const [name, setName] = useState(props.name || '');
   const [student, setStudent] = useState(props.student || '');
   const [interviewer, setInterviewer] = useState(
