@@ -8,17 +8,12 @@ Install dependencies with `npm install`.
 
 A single-page React app that allows users to create, edit, and delete interviews. Built from Lighthouse Labs: https://github.com/lighthouse-labs/scheduler)
 
-### Adding an Interview
+## Screenshots
 
-![Adding an interview]()
+!(https://github.com/feltfan/scheduler/blob/master/docs/addappointment.png?raw=true)
 
-### Editing an Interview
+!(https://github.com/feltfan/scheduler/blob/master/docs/edit:deleteappointment.png?raw=true)
 
-![Editing an interview]()
-
-### Deleting an Interview
-
-![Deleting an interview]()
 
 ### Running Webpack Development Server
 
