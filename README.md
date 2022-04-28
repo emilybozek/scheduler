@@ -32,13 +32,11 @@ npm start
 npm test
 ```
 
-### API Server and Database Setup
+## Running Storybook Visual Testbed
 
-To Implement Database and Server:
-
-- Start by forking and cloning the scheduler-api server: https://github.com/lighthouse-labs/scheduler-api
-- Follow the steps outlined in README to setup the database
-- Run `npm start` to start the server
+```sh
+npm run storybook
+```
 
 ## Dependencies
 
