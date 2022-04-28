@@ -67,7 +67,6 @@ export default function useApplicationData() {
     });
   }
 
-  // axios request to delete interview
   const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],

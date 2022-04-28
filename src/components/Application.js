@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Application.scss';
 import DayList from '../components/DayList';
 import Appointment from '../components/Appointment';
-import axios from 'axios';
 import {
   getAppointmentsForDay,
   getInterview,
@@ -14,18 +13,8 @@ export default function Application(props) {
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
 
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer,
-    };
-  }
-
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
-
-  console.log('DAILY INTERVIEWERS', dailyInterviewers);
-  console.log('DAILY APPOINTMENTS', dailyAppointments);
 
   return (
     <main className="layout">
@@ -47,10 +36,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map((appointment) => {
-          console.log('APPOINTMENT.INTERVIEW', appointment.interview);
           const interview = getInterview(state, appointment.interview);
-
-          console.log('GET INTERVIEW', interview);
           return (
             <Appointment
               key={appointment.id}

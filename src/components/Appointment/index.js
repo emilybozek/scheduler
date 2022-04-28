@@ -10,7 +10,6 @@ import Confirm from './Confirm';
 import Error from './Error';
 
 export default function Appointment(props) {
-  console.log('INDEX PROPS', props);
   const EMPTY = 'EMPTY';
   const SHOW = 'SHOW';
   const CREATE = 'CREATE';
