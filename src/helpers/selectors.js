@@ -6,8 +6,8 @@ export const getAppointmentsForDay = (state, day) => {
       appointmentIds = x.appointments;
     }
   }
-  const keys = Object.keys(state.appointments);
   for (let y of appointmentIds) {
+    const keys = Object.keys(state.appointments);
     for (let z of keys) {
       if (y === Number(z)) {
         results.push(state.appointments[z]);
@@ -35,8 +35,9 @@ export const getInterviewersForDay = (state, day) => {
       interviewerIds = x.interviewers;
     }
   }
-  const keys = Object.keys(state.interviewers);
+
   for (let x of interviewerIds) {
+    const keys = Object.keys(state.interviewers);
     for (let y of keys) {
       if (x === Number(y)) {
         results.push(state.interviewers[y]);
